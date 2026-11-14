@@ -541,14 +541,18 @@ def test_start_handshake_waits_for_match_before_named_bot_connects(tmp_path, mon
     events = []
     relays = []
     pending_console = []
-    clock = [100.0]
+    clock = [0.0]
 
     def advance(seconds):
         clock[0] += seconds
 
     # The mocked transport delivers packets synchronously. Give its camera
     # acknowledgment a later logical tick, independent of OS clock resolution.
-    monkeypatch.setattr(module, "time", SimpleNamespace(monotonic=lambda: clock[0], sleep=advance))
+    monkeypatch.setattr(
+        module,
+        "time",
+        SimpleNamespace(monotonic=lambda: time.perf_counter() + clock[0], sleep=advance),
+    )
 
     class Relay:
         def __init__(self, agent_id):
