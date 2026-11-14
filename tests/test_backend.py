@@ -541,6 +541,14 @@ def test_start_handshake_waits_for_match_before_named_bot_connects(tmp_path, mon
     events = []
     relays = []
     pending_console = []
+    clock = [100.0]
+
+    def advance(seconds):
+        clock[0] += seconds
+
+    # The mocked transport delivers packets synchronously. Give its camera
+    # acknowledgment a later logical tick, independent of OS clock resolution.
+    monkeypatch.setattr(module, "time", SimpleNamespace(monotonic=lambda: clock[0], sleep=advance))
 
     class Relay:
         def __init__(self, agent_id):
@@ -582,6 +590,7 @@ def test_start_handshake_waits_for_match_before_named_bot_connects(tmp_path, mon
                 pending_console.append(message.command)
             if isinstance(message, flat.DesiredGameState) and pending_console:
                 pending_console.clear()
+                advance(0.02)
                 backend._packet(
                     flat.GamePacket(
                         players=[flat.PlayerInfo(player_id=22)],
@@ -631,6 +640,7 @@ def test_start_handshake_waits_for_match_before_named_bot_connects(tmp_path, mon
     assert events[0] == ("connect", "", False)
     assert len(relays) == 2
     assert backend.snapshot()["ready"]
+    assert backend._last_packet_at > backend._last_camera_command
     assert "DesiredGameState" in events and "ConsoleCommand" in events
     backend.close()
     assert ("stop", True) in events

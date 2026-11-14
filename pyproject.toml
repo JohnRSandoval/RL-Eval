@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "rocket-league-frontier-eval"
-version = "0.5.0"
+version = "0.5.1"
 description = "Visual and state-assisted frontier model evaluations in offline Rocket League through RLBot v5"
 readme = "README.md"
 license = "MIT"
