@@ -1,0 +1,7 @@
+[model]
+provider = "openai-compatible"
+model = "YOUR_VISION_MODEL_ID"
+api_key_env = "COMPATIBLE_API_KEY"
+base_url = "http://localhost:8000/v1"
+timeout_s = 15.0
+max_output_tokens = 2048

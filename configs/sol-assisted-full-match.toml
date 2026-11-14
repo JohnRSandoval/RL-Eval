@@ -1,0 +1,36 @@
+# Sol chooses tactics; the shared local motor controller executes at 60 Hz.
+[planner]
+enabled = true
+provider = "openai"
+model = "gpt-6.1-sol"
+control_mode = "local_motor"
+api_key_env = "OPENAI_API_KEY"
+reasoning_effort = "low"
+max_output_tokens = 2048
+timeout_s = 15.0
+interval_s = 5.0
+max_age_s = 15.0
+max_requests = 300
+
+[observation]
+mode = "state"
+
+[control]
+mode = "local_motor"
+scheduling = "continuous"
+motor_hz = 60.0
+motor_max_packet_age_s = 0.1
+
+[episode]
+duration_s = 900.0
+max_errors = 10
+task = "Choose useful tactics for the blue car. Score in orange and defend blue. The local controller executes your typed skill using fresh state."
+
+[rlbot]
+opponent_skill = "Rookie"
+game_speed = 1.0
+spectate_player = true
+
+[recording]
+telemetry_hz = 15.0
+live_window = true

@@ -1,0 +1,17 @@
+# Verified with this provider/model in the local offline game smoke test.
+[model]
+provider = "openai"
+model = "gpt-6.1-sol"
+api_key_env = "OPENAI_API_KEY"
+reasoning_effort = "low"
+timeout_s = 20.0
+max_output_tokens = 2048
+
+[episode]
+duration_s = 60.0
+max_decisions = 50
+max_observation_age_s = 20.0
+
+[rlbot]
+launcher = "Epic"
+opponent_skill = "Rookie"

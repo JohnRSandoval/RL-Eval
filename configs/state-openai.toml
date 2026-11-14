@@ -1,0 +1,20 @@
+# OpenAI Responses example with explicit measured state.
+[model]
+provider = "openai"
+model = "gpt-6.1-sol"
+api_key_env = "OPENAI_API_KEY"
+reasoning_effort = "low"
+timeout_s = 15.0
+max_output_tokens = 2048
+
+[observation]
+mode = "state"
+
+[control]
+scheduling = "continuous"
+max_decision_hz = 5.0
+
+[episode]
+duration_s = 30.0
+max_decisions = 30
+max_observation_age_s = 8.0

@@ -1,0 +1,23 @@
+# Typed direct controller choices, supplied with measured game state.
+[model]
+provider = "openai-decisions"
+model = "gpt-6-luna"
+api_key_env = "OPENAI_API_KEY"
+timeout_s = 3.0
+decision_hold_ms = 300
+
+[observation]
+mode = "state"
+
+[control]
+scheduling = "continuous"
+max_decision_hz = 10.0
+
+[episode]
+duration_s = 30.0
+max_decisions = 150
+max_observation_age_s = 1.0
+max_errors = 5
+
+[recording]
+telemetry_hz = 15.0

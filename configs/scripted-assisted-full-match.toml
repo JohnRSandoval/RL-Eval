@@ -1,0 +1,25 @@
+# No model API calls: scripted tactics with exactly the same local motor controller.
+[planner]
+enabled = false
+max_age_s = 15.0
+
+[observation]
+mode = "state"
+
+[control]
+mode = "local_motor"
+scheduling = "continuous"
+motor_hz = 60.0
+motor_max_packet_age_s = 0.1
+
+[episode]
+duration_s = 900.0
+
+[rlbot]
+opponent_skill = "Rookie"
+game_speed = 1.0
+spectate_player = true
+
+[recording]
+telemetry_hz = 15.0
+live_window = true

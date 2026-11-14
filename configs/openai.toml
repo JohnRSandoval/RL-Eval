@@ -1,0 +1,15 @@
+[model]
+provider = "openai"
+model = "YOUR_VISION_MODEL_ID"
+api_key_env = "OPENAI_API_KEY"
+timeout_s = 15.0
+max_output_tokens = 2048
+# reasoning_effort = "low" # Only set for models supporting this option.
+
+[episode]
+duration_s = 60.0
+max_decisions = 50
+
+[rlbot]
+launcher = "Epic"
+opponent_skill = "Rookie"

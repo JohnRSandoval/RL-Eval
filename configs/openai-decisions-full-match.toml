@@ -1,0 +1,32 @@
+# Five game-clock minutes versus Rookie. End on RLBot's match-ended signal.
+# The 15-minute wall-clock ceiling allows goal pauses and overtime.
+[model]
+provider = "openai-decisions"
+model = "gpt-6-luna"
+api_key_env = "OPENAI_API_KEY"
+timeout_s = 3.0
+decision_hold_ms = 300
+
+[observation]
+mode = "state"
+
+[control]
+scheduling = "continuous"
+max_decision_hz = 10.0
+
+[episode]
+duration_s = 900.0
+max_decisions = 10000
+max_observation_age_s = 1.0
+# Keep occasional slow responses from ending a long match. Stale inputs are
+# still discarded; every failure remains in the report. No automatic retries.
+max_errors = 100
+
+[rlbot]
+opponent_skill = "Rookie"
+game_speed = 1.0
+spectate_player = true
+
+[recording]
+telemetry_hz = 15.0
+live_window = true

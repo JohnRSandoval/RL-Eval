@@ -1,0 +1,6 @@
+[model]
+provider = "gemini"
+model = "YOUR_VISION_MODEL_ID"
+api_key_env = "GEMINI_API_KEY"
+timeout_s = 15.0
+max_output_tokens = 2048

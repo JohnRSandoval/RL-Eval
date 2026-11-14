@@ -1,0 +1,41 @@
+# GPT-6.1 Sol selects tactics; GPT-6 Luna Decisions selects realtime controls.
+[model]
+provider = "openai-decisions"
+model = "gpt-6-luna"
+api_key_env = "OPENAI_API_KEY"
+timeout_s = 3.0
+decision_hold_ms = 300
+
+[planner]
+enabled = true
+provider = "openai"
+model = "gpt-6.1-sol"
+api_key_env = "OPENAI_API_KEY"
+reasoning_effort = "low"
+max_output_tokens = 2048
+timeout_s = 15.0
+interval_s = 5.0
+max_age_s = 20.0
+max_requests = 300
+
+[observation]
+mode = "state"
+
+[control]
+scheduling = "continuous"
+max_decision_hz = 10.0
+
+[episode]
+duration_s = 900.0
+max_decisions = 10000
+max_observation_age_s = 1.0
+max_errors = 100
+
+[rlbot]
+opponent_skill = "Rookie"
+game_speed = 1.0
+spectate_player = true
+
+[recording]
+telemetry_hz = 15.0
+live_window = true

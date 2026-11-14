@@ -1,0 +1,31 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "rocket-league-frontier-eval"
+version = "0.5.0"
+description = "Visual and state-assisted frontier model evaluations in offline Rocket League through RLBot v5"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.11"
+dependencies = ["httpx>=0.28,<1", "Pillow>=11,<13", "mss>=10,<11", "psutil>=7,<8", "rlbot==2.0.0b56"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10", "ruff>=0.14,<1"]
+
+[project.scripts]
+rleval = "rleval.cli:main"
+
+[tool.hatch.build.targets.sdist]
+include = ["/src", "/tests", "/configs", "/README.md", "/ASSISTED.md", "/CALIBRATION.md", "/PRIVACY.md", "/LICENSE", "/setup.ps1", "/pyproject.toml", "/uv.lock", "/.gitignore", "/.gitattributes"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/rleval"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100

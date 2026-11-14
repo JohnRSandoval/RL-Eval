@@ -1,0 +1,31 @@
+# Ground control diagnostic: separate steering and speed, without boost/jump.
+[model]
+provider = "openai-decisions"
+model = "gpt-6-luna"
+api_key_env = "OPENAI_API_KEY"
+action_interface = "ground_axes_v1"
+decision_hold_ms = 300
+timeout_s = 3.0
+
+[observation]
+mode = "state"
+representation = "compact"
+
+[control]
+scheduling = "continuous"
+max_decision_hz = 5.0
+
+[episode]
+max_observation_age_s = 1.0
+max_errors = 5
+
+[rlbot]
+freeplay = false
+calibration_mode = true
+opponent_skill = "None"
+spectate_player = true
+
+[recording]
+output_dir = "calibration-runs"
+telemetry_hz = 15.0
+live_window = true

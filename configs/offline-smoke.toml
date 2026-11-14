@@ -1,0 +1,13 @@
+# Uses actual offline Rocket League with a deterministic input sequence.
+# This tests integration, not model intelligence. No model API calls.
+[model]
+provider = "mock"
+model = "deterministic-smoke"
+
+[episode]
+duration_s = 15.0
+max_decisions = 30
+
+[rlbot]
+launcher = "Epic"
+opponent_skill = "Rookie"
